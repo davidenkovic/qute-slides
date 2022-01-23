@@ -1,0 +1,85 @@
+= Qute
+David Ignjatovic
+1.0, 2021-01-24
+ifndef::sourcedir[:sourcedir: ../src/main/java]
+ifndef::imagesdir[:imagesdir: images]
+ifndef::backend[:backend: html5]
+:icons: font
+:customcss: css/presentation.css
+
+
+== Was macht eine Template Engine?
+
+Template-Engines *rendern* Daten als *HTML* oder in einem *anderen Format* über eine _Template_ (Vorlage). +
+
+Sehr nützlich, wenn man *Daten visualisieren* möchten, die von der *Serverseite* oder aus einer *Datenbank* stammen.
+
+=== Bekannte Template Engine für Java
+
+* https://velocity.apache.org/[Apache Velocity]
+* https://freemarker.apache.org/[Apache FreeMarker]
+* https://www.thymeleaf.org/[Thymeleaf]
+
+=== Beisiel Code (thymeleaf)
+
+[source,html]
+----
+<table>
+  <thead>
+    <tr>
+      <th th:text="#{msgs.headers.name}">Name</th> -- <1>
+      <th th:text="#{msgs.headers.price}">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="prod: ${allProducts}"> -- <2>
+      <td th:text="${prod.name}">Oranges</td>
+    </tr>
+  </tbody>
+</table>
+----
+
+== Problem
+
+Um Daten zu *visualisieren*, brauchen wir jetzt so eine *Template Engine*.
+
+Mit *Qute* geht das ganz einfach.
+
+== Qute
+
+Qute bedeutet
+
+* *QU* uarkus
+* *TE* mplates
+
+Es ist eine Template Engine speziell erstellt für Quarkus.
+Somit kann man Ganz einfach HTML Code in einer WebApp rendern.
+
+=== Beispiel Code
+
+[source,html]
+----
+<body> -- <1>
+    <h1>Hallo, {name}</h1> -- <2>
+    {#for sample in samples} -- <3>
+      <h2>{sample.name ?: 'Unknown'}</h2>
+      <p>
+      {#if sample.valid} -- <4>
+        {sample.data}
+      {#else}
+        <strong>Invalid sample found</strong>.
+      {/if}
+      </p>
+    {/for}
+</body>
+
+----
+
+== Live Coding
+
+== Quellen
+
+* https://softuni.org/dev-concepts/what-is-templating-engine/
+* https://quarkus.io/guides/qute
+* https://www.youtube.com/watch?v=EcIDsb8Vg_A
+* https://www.youtube.com/watch?v=uwDxIVHg1HY
